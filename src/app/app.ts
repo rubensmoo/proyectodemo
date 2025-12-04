@@ -1,10 +1,12 @@
 import { Component, signal } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { Vacanciesboardcomponent } from './vacanciesboardcomponent/vacanciesboardcomponent';
 
 @Component({
   selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.html',
+  standalone: true,
+  imports: [RouterOutlet, Vacanciesboardcomponent],
+  template: `<app-vacanciesboardcomponent />`,
   styleUrl: './app.css'
 })
 export class App {

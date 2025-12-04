@@ -1,0 +1,88 @@
+<div class="p-6 bg-gray-100 min-h-screen">
+  <h2 class="text-2xl font-bold mb-6 text-gray-700">Tablero de Vacantes</h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+    <!-- ========================= -->
+    <!--         NUEVAS           -->
+    <!-- ========================= -->
+    <div class="bg-white rounded-xl shadow p-4">
+      <h3 class="text-xl font-semibold text-gray-800 mb-4">Nuevas</h3>
+
+      <div
+        cdkDropList
+        [cdkDropListData]="todo"
+        [cdkDropListConnectedTo]="['inprogress','done']"
+        id="todo"
+        (cdkDropListDropped)="drop($event)"
+        class="min-h-[300px] space-y-3 p-2 border-2 border-dashed border-gray-300 rounded-lg"
+      >
+        <div
+          *ngFor="let vac of todo"
+          cdkDrag
+          class="bg-blue-100 text-blue-900 p-3 rounded-lg shadow-sm cursor-grab active:cursor-grabbing"
+        >
+          {{ vac.title }}
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================= -->
+    <!--       EN PROCESO         -->
+    <!-- ========================= -->
+    <div class="bg-white rounded-xl shadow p-4">
+      <h3 class="text-xl font-semibold text-gray-800 mb-4">En proceso</h3>
+
+      <div
+        cdkDropList
+        [cdkDropListData]="inprogress"
+        [cdkDropListConnectedTo]="['todo','done']"
+        id="inprogress"
+        (cdkDropListDropped)="drop($event)"
+        class="min-h-[300px] space-y-3 p-2 border-2 border-dashed border-gray-300 rounded-lg"
+      >
+        <div
+          *ngFor="let vac of inprogress"
+          cdkDrag
+          class="bg-yellow-100 text-yellow-900 p-3 rounded-lg shadow-sm cursor-grab active:cursor-grabbing"
+        >
+          {{ vac.title }}
+        </div>
+      </div>
+    </div>
+
+    <!-- ========================= -->
+    <!--        CERRADAS          -->
+    <!-- ========================= -->
+    <div class="bg-white rounded-xl shadow p-4">
+      <h3 class="text-xl font-semibold text-gray-800 mb-4">Cerradas</h3>
+
+      <div
+        cdkDropList
+        [cdkDropListData]="done"
+        [cdkDropListConnectedTo]="['todo','inprogress']"
+        id="done"
+        (cdkDropListDropped)="drop($event)"
+        class="min-h-[300px] space-y-3 p-2 border-2 border-dashed border-gray-300 rounded-lg"
+      >
+        <div
+          *ngFor="let vac of done"
+          cdkDrag
+          class="bg-green-100 text-green-900 p-3 rounded-lg shadow-sm cursor-grab active:cursor-grabbing"
+        >
+          {{ vac.title }}
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="mt-6">
+    <button
+      (click)="clearAll()"
+      class="bg-red-500 text-white px-4 py-2 rounded shadow hover:bg-red-600"
+    >
+      Limpiar Tablero
+    </button>
+  </div>
+</div>
